@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Promesses : map().reduce()</title>
+<meta name="author" content="Gaëtan Langhade, interfacteur">
+<link rel="stylesheet" href="-media/regularize.css">
+<link rel="stylesheet" href="-media/loader.css">
+<style>
+section	{
+	line-height: 1.6;
+	padding: .5em;
+}
+h1	{
+	font-size: 1.2em;
+}
+pre	{
+	padding: 1em;
+}
+</style>
+</head>
+
+<body>
+<section>
+	<h1>Promesses : map().reduce()</h1>
+	<p>Cf. HTML5 Rocks : <a href="http://www.html5rocks.com/fr/tutorials/es6/promises">JavaScript Promises: There and back again</a></p>
+	<pre></pre>
+</section>
+<script src="-media/jquery-2.1.1.min.js"></script>
+<script src="-media/modernizr-custom.js"></script>
+<script>
+;(function () {
+	"use strict";
+
+	if (! Modernizr.promises)
+		return $("body").html("<p>Le support JavaScript des promesses est requis</p>");
+
+// /
+
+	var $pre = $("pre"),
+		ord,
+		des = ord = 0,
+		continents = [
+			"Afrique",
+			"Amériques",
+			"Antarctique",
+			"Asie",
+			"Europe",
+			"Océanie"
+		];
+
+	$pre.append("Données initiales : " + continents.join(", ") + "<br><br>");
+
+	continents.map(function (value, ind) {
+		return new Promise(function (resolve) {
+			setTimeout(function () {
+				$pre.append("  Promesse tenue dans un groupe de promesses simultanées (tenue donc sans coordination) : ", ++des, " ", value + "<br>");
+				resolve(ind + 1 + " " + value);
+			}, Math.round(Math.random() * 2500) + 250);
+		});
+	})
+	.reduce(function (sequence, prom) {
+		return sequence.then(function () {
+			return prom;
+		})
+		.then(function (value) {
+			$pre.append(value + "<br>");
+		});
+	}, Promise.resolve())
+	.then(function () {
+		$("body").addClass("settled");
+		$pre.append("Instruction finale après restitution de l'ordre d'instanciation.");
+	});
+
+}) ();
+</script>
+</body>
+</html>
