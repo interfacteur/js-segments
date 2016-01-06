@@ -1,7 +1,7 @@
-* Promises : encapsulant jQuery, ou le contraire
+* promises-and-jquery.js : promesses encapsulant jQuery, ou le contraire
 
 
 
 Dossiers
 
-* Promises : map().reduce()
+* promises-map-reduce : map().reduce() pour restituer l'ordre d'instanciation
