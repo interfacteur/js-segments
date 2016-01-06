@@ -1,0 +1,1 @@
+* Promises : map().reduce()
