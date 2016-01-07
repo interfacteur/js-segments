@@ -1,7 +1,7 @@
 Promises and recursion: scheduling simultaneous promises
 
 
-Online exemples: http://www.equatorium.net/e1/ex--exemples/promises-recursion/promises-recursion-INDEX.html
+Online examples: http://www.equatorium.net/e1/ex--exemples/promises-recursion/promises-recursion-INDEX.html
 
 Presentation: http://interfacteur.blogspot.fr/2016/01/promesses-recursivite.html
 
