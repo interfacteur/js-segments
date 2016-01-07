@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Promesses et récursivité : ordonnancer un groupe de promesses simultanées (1) \ Bambous ~ exemples / Equatorium</title>
+<meta name="author" content="Gaëtan Langhade, interfacteur">
+<link rel="stylesheet" href="-media/regularize.css">
+<link rel="stylesheet" href="-media/loader.css">
+<style>
+h1	{
+	font-size: 1.2em;
+}
+h1,
+p,
+pre	{
+	padding: 1em;
+}
+div	{
+	font-size: .9em;
+	padding-right: 1em;
+	text-align: right;
+}
+div a	{
+	color: #000;
+}
+</style>
+</head>
+
+<body>
+<h1>Promesses et récursivité : ordonnancer un groupe de promesses simultanées (1)</h1>
+<div>
+	<a href="http://interfacteur.blogspot.com/2016/01/promesses-recursivite.html">Note de présentation</a>
+	~
+	<a href="https://github.com/interfacteur/js-segments/tree/master/promises-recursion">Code sur Github</a>
+</div>
+<p>Les instructions par récursivité sont encore des promesses de base dans ce développement.</p>
+<pre></pre>
+<script src="-media/jquery-2.1.1.min.js"></script>
+<script src="-media/modernizr-custom.js"></script>
+<script>
+;(function () {
+	"use strict";
+
+	if (! Modernizr.promises)
+		return $("body").html("<p>Le support JavaScript des promesses est requis</p>");
+
+	var datas = {
+			brut: [[2, []], [3, []], [4, [2]], [6, [2, 3]], [8, [4]]],
+			proxy: [[3, []], [4, [2]], [8, [2]], [6, [2, 3]], [2, []]], //sort(function () { return Math.random() - .5; })
+			net: {
+				2: false,
+				3: false,
+				4: false,
+				6: false,
+				8: false
+			},
+			purge: []
+		},
+
+		purge = function () {
+			datas.purge.sort(function (a, b) { return b - a; });
+			for (var i = 0, len = datas.purge.length; i < len; ++i) {
+				datas.proxy.splice(datas.purge[i], 1);
+			}
+			datas.purge = [];
+		},
+
+		promRecursive = function () {
+			if (datas.proxy.length > 0) {
+					//et l'instruction finale peut être exécutée
+				return Promise.all( //promRecursive est une promesse groupant des promesses
+					datas.proxy.map(function (values, ind) { //réduire un tableau de valeurs numériques…
+						return new Promise(function (resolve) { //… en tableau de promesses de base
+							setTimeout(function () { //simuler l'indetermination de la durée d'une promesse
+								var value = values[0], //traitement : tenter d'atteindre l'objectif
+									factors = values[1],
+									condition = true;
+								for (var i in factors) {
+									if (datas.net[factors[i]] === false) {
+										condition = false;
+										break;
+									}
+								}
+								if (condition == true) {
+									datas.net[value] = factors;
+									datas.purge.push(ind);
+								}
+								resolve(); //tenir la promesse de base
+							}, Math.round(Math.random() * 500) + 500);
+						});
+					})
+				)
+				.then(purge)
+				.then(promRecursive); //promesse récursive
+			}
+			//dès que tous les objectifs sont tenus, promRecursive est sans instruction et l'instruction finale est exécutée
+		};
+
+	promRecursive() //promesse globale et récursive
+	.then(function () { //instruction finale
+		$("body").addClass("settled");
+		$("pre").append(JSON.stringify(datas.net));
+	});
+
+}) ();
+</script>
+</body>
+</html>

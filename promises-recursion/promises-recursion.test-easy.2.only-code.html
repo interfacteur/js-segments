@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Promesses et récursivité : ordonnancer un flux de téléchargements simultanés (2) \ Bambous ~ exemples / Equatorium</title>
+<meta name="author" content="Gaëtan Langhade, interfacteur">
+<link rel="stylesheet" href="-media/regularize.css">
+<link rel="stylesheet" href="-media/results.css">
+<link rel="stylesheet" href="-media/loader.css">
+</head>
+
+<body>
+<h1>Promesses et récursivité : ordonnancer un flux de téléchargements simultanés (2)</h1>
+<div>
+	Téléchargement : données mélangées, sans méta-info, solution standard
+	<div>
+		<a href="http://interfacteur.blogspot.com/2016/01/promesses-recursivite.html">Note de présentation</a>
+		~
+		<a href="https://github.com/interfacteur/js-segments/tree/master/promises-recursion">Code sur Github</a>
+	</div>
+</div>
+<p>
+	Il s'agit d'attribuer à chaque donnée téléchargée ses facteurs si elle en a.
+	Chaque facteur est lui-même attribué avec ses propres facteurs s'il en a.
+	Un facteur est en fait une autre donnée téléchargée. Tant que celle-ci n'est pas téléchargée, le facteur n'est pas disponible.
+	Si elle est téléchargée mais que ses facteurs (si elle en a) ne sont pas disponibles, elle n'est toujours pas disponible.<br>
+	<em>Chaque donnée est ainsi pleinement disponible quand elle est téléchargée, que ses propres facteurs éventuels sont téléchargés et disponibles eux-mêmes, càd que les facteurs de ses facteurs le sont aussi etc.</em>
+</p>
+<h2>Solution</h2>
+<ol>
+	<li>Promise.all() : flux de téléchargements, chacun suivi de son traitement</li>
+	<li>.then() : lot récursif de traitements, lié comme promesse à ce flux</li>
+	<li>.then() : instruction finale, liée comme promesse à ces lots</li>
+</ol>
+<h2>Résultat avec données mélangées et sans méta-info (code plus lisible)</h2>
+<dl class="floor"></dl>
+<script src="-media/jquery-2.1.1.min.js"></script>
+<script src="-media/modernizr-custom.js"></script>
+<script>
+;(function () {
+	"use strict";
+
+	if (! Modernizr.promises)
+		return $("body").html("<p>Le support JavaScript des promesses est requis</p>").addClass("settled");
+
+	var datas = {
+			brut: [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 54, 76, 234,
+				340, 532, 540, 780, 1386, 2660, 4212, 4500, 4680, 4800, 5040, 5760, 6080, 8208, 9000],
+			net: {},
+			setDatasNetBegin: function (v) {
+				this.net[v] = "<dl><dt>" + v + "</dt>";
+			},
+			setDatasNet: function (v, f) {
+				this.net[v] += "<dd>" + this.net[f] + "</dd>";
+			},
+			setDatasNetFinish: function (v, i) {
+				this.net[v] != false
+				&& (this.net[v] += "</dl>")
+				&& this.purge.push(i);
+			},
+			purge: []
+		},
+		treat = function () {
+			datas.purge.sort(function (a, b) { return b - a; });
+			for (var i = 0, len = datas.purge.length; i < len; ++i)
+				datas.proxy.splice(datas.purge[i], 1);
+			if (datas.proxy.length == 0)
+				return;
+			datas.purge = [];
+			datas.proxy.forEach(function (values, ind) {
+				var value = values[0],
+					factors = values[1],
+					len = factors.length;
+				datas.setDatasNetBegin(value);
+				for (var i = 0; i < len; ++i) {
+					if (datas.net[factors[i]] == false) {
+						datas.net[value] = false;
+						break;
+					}
+					datas.setDatasNet(value, factors[i]);
+				}
+				datas.setDatasNetFinish(value, ind);
+			});
+			treat();
+		};
+
+	datas.proxy = datas.brut.map(function (value) {
+		datas.net[value] = false;
+		return value;
+	})
+	.sort(function () { return Math.random() - .5; });
+
+	Promise.all(
+		datas.proxy.map(function (value, ind) {
+			return $.getJSON("http://www.equatorium.net/e1/ou--outils/-nombres.php?callback=?&nombre=" + value)
+			.then(function (factors) {
+				switch(factors.length) {
+					case 0:
+						datas.setDatasNetBegin(value);
+						datas.net[value] += "<dd>Ø</dd>";
+						datas.setDatasNetFinish(value, ind);
+						break;
+					default:
+						datas.proxy[ind] = [value, factors];
+	}	});	})	)
+	.then(treat)
+	.then(function () {
+		$("body").addClass("settled");
+		$("dl").html(
+			Object.keys(datas.net).map(function (code) {
+				return datas.net[code].replace(/(^<dl>)|(<\/dl>)$/g, "");
+			})
+			.join("")
+			.replace(/<\/dl><\/dd><dd><dl>/g, "")
+	);	});
+
+}) ();
+</script>
+</body>
+</html>
