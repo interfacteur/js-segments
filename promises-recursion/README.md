@@ -1,12 +1,16 @@
 Promises and recursion: scheduling simultaneous promises
 
 
+Online exemples: http://www.equatorium.net/e1/ex--exemples/promises-recursion/promises-recursion-INDEX.html
+
+Presentation: http://interfacteur.blogspot.fr/2016/01/promesses-recursivite.html
+
 * promises-recursion.0.html : structure
 * promises-recursion.1.html : full promises exemple
 * promises-recursion.2.html : standard exemple
 * promises-recursion.3.html : standard exemple with 2 functions
 
-Tests standard
+Tests in current mode
 
 * promises-recursion.test-easy.1.html : test of multiple dependancies
 * promises-recursion.test-easy.2.html : test of factors downloaded, mixed list, with meta info
