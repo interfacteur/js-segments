@@ -5,12 +5,14 @@ Online exemples: http://www.equatorium.net/e1/ex--exemples/promises-recursion/pr
 
 Presentation: http://interfacteur.blogspot.fr/2016/01/promesses-recursivite.html
 
+Structure:
+
 * promises-recursion.0.html : structure
 * promises-recursion.1.html : full promises exemple
 * promises-recursion.2.html : standard exemple
 * promises-recursion.3.html : standard exemple with 2 functions
 
-Tests in current mode
+Tests in current mode:
 
 * promises-recursion.test-easy.1.html : test of multiple dependancies
 * promises-recursion.test-easy.2.html : test of factors downloaded, mixed list, with meta info
@@ -18,7 +20,7 @@ Tests in current mode
 * promises-recursion.test-easy.3.html : test of factors downloaded, reverse list, with meta info
 * promises-recursion.test-easy.3.only-code.html : test of factors downloaded, reverse list
 
-Tests full promises
+Tests full promises:
 
 * promises-recursion.test-full.1.html : test of multiple dependancies (full promises)
 * promises-recursion.test-full.2.html : test of factors downloaded, mixed list, with meta info (full promises)
