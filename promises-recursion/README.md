@@ -8,9 +8,9 @@ Presentation: http://interfacteur.blogspot.fr/2016/01/promesses-recursivite.html
 Structure:
 
 * promises-recursion.0.html : structure
-* promises-recursion.1.html : full promises exemple
-* promises-recursion.2.html : standard exemple
-* promises-recursion.3.html : standard exemple with 2 functions
+* promises-recursion.1.html : full promises example
+* promises-recursion.2.html : current mode example
+* promises-recursion.3.html : current mode example with 2 functions
 
 Tests in current mode:
 
