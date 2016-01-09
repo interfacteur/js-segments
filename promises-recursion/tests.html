@@ -44,35 +44,32 @@ div a	{
 	if (! Modernizr.promises)
 		return $("body").html("<p>Le support JavaScript des promesses est requis</p>");
 
-	var datas = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	var starting = true,
 		$pre = $("pre"),
 
 		promRecursive = function () {
-/*			if (datas.length > 0)
-				return Promise.all(	*/
-			return datas.length == 0 ?
-				$pre.append("fin") :
-				$pre.append(datas + "\n")
-				&& Promise.all(
-					datas.map(function (value, ind) {
-						return new Promise(function (resolve) {
-							setTimeout(function () {
-								Math.round(Math.random()) == 0
-								&& datas.splice(ind, 1);
-								resolve();
-							}, Math.round(Math.random() * 750) + 500);
-					});	})
-				)
-				.then(promRecursive);
+			return starting == true ?
+				new Promise(function (resolve) {
+					setTimeout(function () {
+						starting = false;
+						resolve();
+					}, 1000);
+				})
+				.then(promRecursive)
+				:
+				Math.ceil(Math.random() * 24) != 24 ?
+				console.log("ici") :
+				true;
 		};
 
 	promRecursive() //promesse globale et récursive
 	.then(function () { //instruction finale
 		$("body").addClass("settled");
-		$pre.append(".");
+		$pre.append("…÷≠∞∞∞∞∞∞∞∞∞∞");
 	});
 
-}) ();
+							// }, Math.round(Math.random() * 750) + 500);
+}) ();//
 </script>
 </body>
 </html>
