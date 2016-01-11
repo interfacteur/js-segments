@@ -1,13 +1,14 @@
 /* Gaëtan Langhade, Interfacteur, mars-avril 2015
 
+au 30 avril 2015, test sur http://www.equatorium.net/e1/+tests/touchable-son.html
+
 jouer des sons en mode play vs stop selon l'API HTML5
 	.mp3 et .ogg
 	avec gestion tactile et prise en compte spécificités Apple cf. http://www.ibm.com/developerworks/library/wa-ioshtml5/
 	sans les erreurs dues aux output de certains PC, ainsi Win c/o Ludwik : "La ressource media http://....mp3 n'a pu être décodée."
 suppose jQuery
 
-au 30 avril 2015, test sur http://www.equatorium.net/e1/tests/touchable-son.html
-
+mise en œuvre sur http://www.langhade.net/ludwik/jeux/
 */
 
 
