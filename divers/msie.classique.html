@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<!--
+Limiter les capacités de MSIE à sa version 9 sur un développement classique
+
+pour un développement classique, sans les apports de HTML5,
+faire de MSIE 9 le mode de rendu maximum (*)
+de façon à pouvoir "jouer" avec les commentaires conditionnels HTML et JavaScript
+
+(*) précisément : faire sur MSIE de la version 9 le mode de rendu max
+
+attention, au validateur : Bad value X-UA-Compatible for attribute http-equiv on element meta.
+-->
+
+<html lang="fr">
+<!--[if IE ]><![endif]-->
+
+<head>
+<meta charset="UTF-8">
+<!--[if lte IE 9]> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9;chrome=1">
+
+<title>Titre de la page</title>
+</head>
+
+<body>
+<h1>Parc naturel des expressions régulières</h1>
+<p>if (ie > 9) ie = 9</p>
+<p>
+pour un développement classique, sans les apports de HTML5,
+faire de MSIE 9 le mode de rendu maximum (*)
+de façon à pouvoir "jouer" encore avec les commentaires conditionnels en HTML et en JavaScript
+<br>
+(*) précisément : faire sur MSIE de la version 9 le mode de rendu max</p>
+<h2>En HTML</h2>
+<!--[if IE ]><ins>pour IE seulement</ins><![endif]-->
+<!--[if !IE]><!--><del>pour IE seulement</del><!--<![endif]-->
+<h2>En JavaScript</h2>
+<div>&nbsp;</div>
+<script>
+var d = (document.querySelector && document.querySelector("div")) || document.body.getElementsByTagName("div")[0];
+d.innerHTML ="pour les communs"
+/*@cc_on
+d.innerHTML = "pour MSIE ";
+d.innerHTML += parseInt(navigator.userAgent.toLowerCase().split("msie")[1]);
+@*/
+</script>
+</body>
+</html>

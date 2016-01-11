@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>États de variables : existence et valeur</title>
+</head>
+
+<body>
+<h1>Variables : déclaration, affectation, exécution</h1>
+<pre>
+ante-scriptum 151213 : commencer par relire http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html
+et à comparer
+
+var a = 1;
+function b() {
+  console.log(a);
+	a = 10;
+	return;
+	function a() {}
+}
+b();
+console.log(a);
+
+avec
+
+var a = 1;
+function b() {
+  console.log(a);
+	a = 10;
+	return;
+	//function a() {}
+}
+b();
+console.log(a);
+
+
+------------------
+
+Rappel :
+en mode "use strict", une variable globale v :
+- est traitée en évaluation et en affectation par window.v / window["v"]
+- ne peut être traitée par l'opérateur delete sur v sans provoquer une erreur SyntaxError :
+	applying the 'delete' operator to an unqualified name is deprecated !!!
+- ne peut être traitée par l'opérateur delete sur window.v sans provoque une erreur TypeError :
+	property "v" is non-configurable and can't be deleted
+
+en mode normal, une variable globale v :
+- est traitée en évaluation et en affectation par window.v / window["v"]
+- n'est traitée (ni comme telle, ni comme propriété de window) par l'opérateur delete sur v et sur window.v,
+	mais aucune erreur n'est levée
+
+en mode normal, une variable locale v résultant d'une affectation sans déclaration :
+- devient globale
+- est traitée en évaluation et en affectation par window.v / window["v"]
+- est traitée (comme telle et comme propriété de window) par l'opérateur delete sur v et sur window.v
+
+
+JEU DES VARIABLES ENTRE DÉCLARATION, AFFECTATION ET EXÉCUTION
+
+I- En "use strict"
+
+1) une déclaration de variable vaut "synchroniquement" sur sa portée, par effet du "hoisting" elle existe
+dès le début de l'exécution :
+
+	que sa déclaration précède ou suive son évaluation
+
+	que sa déclaration soit exécutable ou non exécutable : au-delà d'un return,
+	dans une condition non remplie etc.
+
+
+2) une affectation de variable vaut "diachroniquement" sur sa portée, c'est-à-dire que la variable
+	n'a de valeur qu'à partir du moment où l'affectation est exécutée
+
+	par "hoisting" la variable est de type "undefined" jusqu'à l'instant de l'exécution de l'affectation
+
+
+II- Avant "use strict"
+
+affecter une valeur à une variable non déclarée crée une variable globale : existant après l'affectation,
+devant apparaître "diachroniquement" dans le contexte global
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var :
+"Declared variables are created before any code is executed. Undeclared variables do not exist until
+the code assigning to them is executed."
+
+
+</pre>
+<script>
+"use strict";
+/* Note :
+Les variables non déclarées passent :
+	if (typeof un === "undefined")
+et creent une erreur avec :
+	if (un === undefined) (à éviter si undefined n'est pas un mot clé)
+	if (! un)
+Les variables déclarées sans affectation passent les 3
+Les propriétés non déclarées passent les 3
+	- l'existence d'une propriété pouvant se tester avec "prop" in object
+	et object.hasOwnProperty("prop") pour exclure les propriétés héritées (?)
+	(voir aussi object.prop et object["prop"])
+L'existence d'une variable globale peut ainsi être testée avec :
+	"identifiantVariable" in window
+*/
+
+String.prototype.controler = function(){
+	try{
+		return eval(this) === undefined ?
+			" :\n\ta une valeur indéfinie" :
+			" :\n\t++++++++ a une valeur définie ++++++++";
+	}
+	catch(e){ return " :\n\t-------- n'existe pas --------"; }
+}
+
+var B;
+if (false){
+	var C;
+}
+var D = 4;
+if (false){
+	var E = 4;
+}
+
+var existences = new Array();
+existences.push(["A, sans déclaration" + "A".controler()]);
+
+existences.push(["B, déclaration sans affectation, en amont avec exécution" + "B".controler()]);
+existences.push(["D, déclaration avec affectation, en amont avec exécution" + "D".controler()]);
+existences.push(["BB, déclaration sans affectation, en aval avec exécution" + "BB".controler()]);
+existences.push(["DD, déclaration avec affectation, en aval avec exécution" + "DD".controler()]);
+
+existences.push(["C, déclaration sans affectation, en amont sans exécution" + "C".controler()]);
+existences.push(["E, déclaration avec affectation, en amont sans exécution" + "E".controler()]);
+existences.push(["CC, déclaration sans affectation, en aval sans exécution" + "CC".controler()]);
+existences.push(["EE, déclaration avec affectation, en aval sans exécution " + "EE".controler()]);
+
+console.log(existences.join("\n"))
+
+var BB;
+if (false){
+	var CC;
+}
+var DD = 4;
+if (false){
+	var EE = 4;
+}
+
+/*
+FF 35 Mac le 141216
+
+A, sans déclaration :
+	-------- n'existe pas --------
+B, déclaration sans affectation, en amont avec exécution :
+	a une valeur indéfinie
+D, déclaration avec affectation, en amont avec exécution :
+	++++++++ a une valeur définie ++++++++
+BB, déclaration sans affectation, en aval avec exécution :
+	a une valeur indéfinie
+DD, déclaration avec affectation, en aval avec exécution :
+	a une valeur indéfinie
+C, déclaration sans affectation, en amont sans exécution :
+	a une valeur indéfinie
+E, déclaration avec affectation, en amont sans exécution :
+	a une valeur indéfinie
+CC, déclaration sans affectation, en aval sans exécution :
+	a une valeur indéfinie
+EE, déclaration avec affectation, en aval sans exécution  :
+	a une valeur indéfinie
+
+*/
+
+</script>
+</body>
+</html>

@@ -2,6 +2,8 @@ JavaScript, segments de code
 
 
 * promises-and-jquery.js : promesses encapsulant jQuery, ou le contraire
+* regex.js : expressions régulières utiles
+* regex1311.js : expressions régulières anciennement utiles
 * son-routine.js : jouer des sons en mode play vs stop selon l'API HTML5
 
 
