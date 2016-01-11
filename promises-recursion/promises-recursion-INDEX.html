@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Promesses et récursivité : index \ Bambous ~ exemples / Equatorium</title>
+<meta name="author" content="Gaëtan Langhade, interfacteur">
+<link rel="stylesheet" href="-media/regularize.css">
+<style>
+body	{
+	line-height: 1.5;
+}
+a	{
+	color: #000;
+}
+h1	{
+	font-size: 1.2em;
+}
+h2	{
+	font-size: 1em;
+}
+h1,
+h2,
+div,
+dl	{
+	padding: 1em 0 0 1em;
+}
+dt,
+dd	{
+	display: block;
+}
+dd	{
+	margin: 0 0 .8em 6.4em;
+}
+</style>
+</head>
+
+<body>
+<h1>Promesses et récursivité : sommaire</h1>
+<div>
+	<a href="http://interfacteur.blogspot.com/2016/01/promesses-recursivite.html">Note de présentation</a>
+	~
+	<a href="https://github.com/interfacteur/js-segments/tree/master/promises-recursion">Codes sur Github</a>
+</div>
+<h2>Exemples</h2>
+<dl>
+	<dt>promises-recursion.0.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.0.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.0.html">"ordonnancer un groupe de promesses simultanées" : <span lang="en">structure</span></a></dd>
+	<dt>promises-recursion.1.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.1.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.1.html">"ordonnancer un groupe de promesses simultanées (1)" : <span lang="en">full promises example</span></a></dd>
+	<dt>promises-recursion.2.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.2.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.2.html">"ordonnancer un groupe de promesses simultanées (2)" : <span lang="en">current mode example</span></a></dd>
+	<dt>promises-recursion.3.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.3.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.3.html">"ordonnancer un groupe de promesses simultanées (3)" : <span lang="en">current mode example with 2 functions</span></a></dd>
+</dl>
+<h2>Tests en mode courant</h2>
+<dl>
+	<dt>promises-recursion.test-easy.1.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-easy.1.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-easy.1.html">"ordonnancer une généalogie dans un groupe de promesses simultanées (1)" : <span lang="en">test of multiple dependancies</span></a></dd>
+	<dt>promises-recursion.test-easy.2.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-easy.2.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-easy.2.html">"ordonnancer un flux de téléchargements simultanés (1)" : <span lang="en">test of factors downloaded, mixed list, with meta info</span></a></dd>
+	<dt>promises-recursion.test-easy.2.only-code.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-easy.2.only-code.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-easy.2.only-code.html">"ordonnancer un flux de téléchargements simultanés (2)" : <span lang="en">test of factors downloaded, mixed list</span></a></dd>
+	<dt>promises-recursion.test-easy.3.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-easy.3.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-easy.3.html">"ordonnancer un flux de téléchargements simultanés (3)" : <span lang="en">test of factors downloaded, reverse list, with meta info</span></a></dd>
+	<dt>promises-recursion.test-easy.3.only-code.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-easy.3.only-code.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-easy.3.only-code.html">"ordonnancer un flux de téléchargements simultanés (4)" : <span lang="en">test of factors downloaded, reverse list</span></a></dd>
+</dl>
+<h2>Tests full promises</h2>
+<dl>
+	<dt>promises-recursion.test-full.1.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-full.1.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-full.1.html">"ordonnancer une généalogie dans un groupe de promesses simultanées (2)" : <span lang="en">test of multiple dependancies (full promises)</span></a></dd>
+	<dt>promises-recursion.test-full.2.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-full.2.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-full.2.html">"ordonnancer un flux de téléchargements simultanés (5)" : <span lang="en">test of factors downloaded, mixed list, with meta info (full promises)</span></a></dd>
+	<dt>promises-recursion.test-full.2.only-code.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-full.2.only-code.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-full.2.only-code.html">"ordonnancer un flux de téléchargements simultanés (6)" : <span lang="en">test of factors downloaded, mixed list (full promises)</span></a></dd>
+	<dt>promises-recursion.test-full.3.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-full.3.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-full.3.html">"ordonnancer un flux de téléchargements simultanés (7)" : <span lang="en">test of factors downloaded, reverse list, with meta info (full promises)</span></a></dd>
+	<dt>promises-recursion.test-full.3.only-code.html <small><a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-full.3.only-code.html">&lt;code&gt;</a></small></dt>
+	<dd><a href="promises-recursion.test-full.3.only-code.html">"ordonnancer un flux de téléchargements simultanés (8)" : <span lang="en">test of factors downloaded, reverse list (full promises)</span></a></dd>
+</dl>
+</body>
+</html>
