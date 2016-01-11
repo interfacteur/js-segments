@@ -14,6 +14,7 @@ body:before	{
 	position: absolute;
 	text-align: center;
 	width: 1em;
+	z-index: 1;
 
 	background: -webkit-radial-gradient(center, circle contain, #FFF 0%, #FFF 2%, #679 2%, #FFF 100%);
 	background: -moz-radial-gradient(center, circle contain, #FFF 0%, #FFF 2%, #679 2%, #FFF 100%);
