@@ -9,5 +9,6 @@ JavaScript, segments de code
 
 Dossiers
 
+* divers : astuces, aides-mémoire, tests, snippets
 * promises-map-reduce : map().reduce() pour restituer l'ordre d'instanciation
 * promises-recursion : ordonnancer des promesses simultanées
