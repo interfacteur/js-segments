@@ -2,10 +2,105 @@
 
 
 
-
-
 //Avec un délai supplémentaire
-function promettreMinimum(clb, dur) {
+function promettreMinimum (clb, dur) {
+	"use strict";
+	var debut = new Date();
+	promettreMinimum.follow = promettreMinimum.follow || function (eta) {
+		var duree = new Date() - debut;
+		return new Date() - debut < dur ?
+			new Promise(function (resolve) {
+				setTimeout(function () {
+					resolve(eta + " delai sup. " + (dur - duree));
+				}, dur - duree);
+			})
+			:
+			eta;
+	};
+	return new Promise(clb)
+	.then(promettreMinimum.follow, promettreMinimum.follow);
+}
+
+promettreMinimum(function (resolve, reject) {
+	setTimeout(function() {
+		var etat = Math.round(Math.random() * 3) == 3 ? "rejected" : "fulfilled";
+		console.log("promesse", etat);
+		if (etat == "fulfilled")
+			resolve(etat);
+		else
+			reject(etat);
+	}, Math.round(Math.random() * 2750));
+}, 2000)
+.then(function (eta) { console.log("ok", eta); });
+
+
+/*
+promesse rejected
+ok rejected
+
+promesse fulfilled
+ok fulfilled delai sup. 27
+
+promesse fulfilled
+ok fulfilled delai sup. 949
+
+promesse fulfilled
+ok fulfilled
+
+promesse fulfilled
+ok fulfilled
+
+promesse fulfilled
+ok fulfilled delai sup. 290
+
+promesse fulfilled
+ok fulfilled
+
+promesse fulfilled
+ok fulfilled delai sup. 508
+
+promesse fulfilled
+ok fulfilled delai sup. 1874
+
+promesse fulfilled
+ok fulfilled delai sup. 510
+
+promesse fulfilled
+ok fulfilled
+
+promesse fulfilled
+ok fulfilled delai sup. 130
+
+promesse fulfilled
+ok fulfilled
+
+promesse fulfilled
+ok fulfilled
+
+promesse fulfilled
+ok fulfilled delai sup. 171
+
+promesse fulfilled
+ok fulfilled
+
+promesse rejected
+ok rejected
+
+promesse rejected
+ok rejected delai sup. 1836
+*/
+
+
+
+
+
+/*
+SANS REJET
+*/
+
+//Avec un délai supplémentaire (sans rejet)
+function promettreMinimum (clb, dur) {
+	"use strict";
 	var debut = new Date();
 	return new Promise(clb)
 	.then(function() {
@@ -27,8 +122,9 @@ promettreMinimum(function (resolve) {
 .then(function () { console.log("ok"); });
 
 
-//Avec relance de la fonction en promesse autant de fois que nécessaire
-function promettreMinimum(clb, dur) {
+//Avec relance de la fonction en promesse autant de fois que nécessaire (sans rejet)
+function promettreMinimum (clb, dur) {
+	"use strict";
 	promettreMinimum.debut = promettreMinimum.debut || new Date();
 	return new Date() - promettreMinimum.debut < dur ?
 		new Promise(clb)
@@ -48,8 +144,9 @@ promettreMinimum(function (resolve) {
 .then(function () { console.log("ok"); });
 
 
-//Avec relance de la fonction en promesse, mais aucune certitude sur la durée globale : il faudrait boucler (cf. solution précédente)
-function promettreMinimum(clb, dur) {
+//Avec relance de la fonction en promesse, mais aucune certitude sur la durée globale : il faudrait boucler (cf. solution précédente) (sans rejet)
+function promettreMinimum (clb, dur) {
+	"use strict";
 	var debut = new Date();
 	return new Promise(clb)
 	.then(function() {
@@ -68,8 +165,9 @@ promettreMinimum(function (resolve) {
 .then(function () { console.log("ok"); });
 
 
-//Avec délai supplémentaire et relance de la fonction en promesse (càd deux rallonges dont l'une assure le délai minimal)
-function promettreMinimum(clb, dur) {
+//Avec délai supplémentaire et relance de la fonction en promesse (càd deux rallonges dont l'une assure le délai minimal) (sans rejet)
+function promettreMinimum (clb, dur) {
+	"use strict";
 	var debut = new Date();
 	return new Promise(clb)
 	.then(function() {
@@ -100,7 +198,7 @@ promettreMinimum(function (resolve) {
 
 
 
-//Avec structure intégrée, duree paramétrable :
+//Avec structure intégrée, duree paramétrable (sans rejet)
 function promettre (dur) {
 	"use strict";
 	var debut = new Date();
@@ -126,7 +224,7 @@ promettre(2000)
 .then(function () { console.log("ok"); });
 
 
-//Avec structure intégrée, durée de 2000 ms :
+//Avec structure intégrée, durée de 2000 ms (sans rejet)
 function promettre () {
 	"use strict";
 	var debut = new Date();
