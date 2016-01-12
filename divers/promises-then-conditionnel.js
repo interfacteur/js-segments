@@ -4,7 +4,7 @@
 function promettre (id) {
 	var identifiant, hasard;
 	return ! promettre[id] ?
-		(identifiant = "a" + new Date().getTime() + Math.round(Math.random() * 100000))
+		(identifiant = "a" + new Date().getTime() + Math.round(Math.random() * 10000000))
 		&& (promettre[identifiant] = true)
 		&& (hasard = Math.round(Math.random()) + 1)
 		&& new Promise(function(resolve) {
