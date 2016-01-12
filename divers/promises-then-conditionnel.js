@@ -2,19 +2,19 @@
 
 
 function promettre (ran) {
-	var rn, nr;
+	var randId, randNumb;
 	return ! promettre[ran] ?
-		(nr = Math.round(Math.random()) + 1)
-		&& (rn = "a" + Math.round(Math.random() * 10000))
-		&& (promettre[rn] = true)
+		(randId = "a" + Math.round(Math.random() * 10000))
+		&& (promettre[randId] = true)
+		&& (randNumb = Math.round(Math.random()) + 1)
 		&& new Promise(function(resolve) {
 			setTimeout(function() {
-				console.log("résolution 0", rn);
-				resolve(rn);
+				console.log("résolution 0", randId);
+				resolve(randId);
 			}, 1000);
 		})
-		[nr == 1 ? "catch" : "then"]
-		(nr == 1 ? function(ran){ delete promettre[ran]; return ran; } : promettre)
+		[randNumb == 1 ? "catch" : "then"]
+		(randNumb == 1 ? function(ran){ delete promettre[ran]; return ran; } : promettre)
 		:
 		console.log("then 0", ran)
 		&& (Math.round(Math.random()) == 0) ?
