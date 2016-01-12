@@ -1,26 +1,33 @@
-//possibilités pour rendre conditionnelle la méthode .then()
+//études pour rendre conditionnelle la méthode .then()
 
 
-function promettre () {
-	return ! promettre.init ?
-		(promettre.init = true)
+
+function promettre (ran) {
+	var rn;
+	return ! promettre[ran] ?
+		(rn = "a" + Math.round(Math.random() * 10000))
+		&& (promettre[rn] = true)
 		&& new Promise(function(resolve) {
 			setTimeout(function() {
-				console.log("résolution 0");
-				resolve();
+				console.log("résolution 0", rn);
+				resolve(rn);
 			}, 1000);
 		})
 		.then(promettre)
 		:
-		console.log("then 0")
+		console.log("then 0", ran)
 		&& (Math.round(Math.random()) == 0) ?
-			promettre()
+			promettre(ran)
 			:
-			true;
+			delete promettre[ran]
+			&& ran;
 }
 
 promettre()
-.then(function () { console.log("fin 0"); });
+.then(function (ran) { console.log("fin 0", ran); });
+promettre()
+.then(function (ran) { console.log("fin 0", ran); });
+
 
 
 var x = Math.round(Math.random());
