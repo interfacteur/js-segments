@@ -38,7 +38,7 @@ function promettre (duree) {
 				resolve();
 			}, Math.round(Math.random() * (duree + 500)) + 250);
 		})
-    .then(function() { return promettre(duree); })
+		.then(function() { return promettre(duree); })
 		:
 		(promettre.duree = new Date() - promettre.debut)
 		&& delete promettre.debut
