@@ -12,9 +12,7 @@ function promettreMinimum(clb, dur) {
 		var duree = new Date() - debut;
 		return new Date() - debut < dur ?
 			new Promise(function (resolve) {
-				setTimeout(function () {
-					resolve();
-				}, dur - duree)
+				setTimeout(resolve, dur - duree);
 			})
 			:
 			true;
