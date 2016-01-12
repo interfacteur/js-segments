@@ -1,11 +1,11 @@
 //études pour rendre conditionnelle la méthode .then()
 
 
-
 function promettre (ran) {
-	var rn;
+	var rn, nr;
 	return ! promettre[ran] ?
-		(rn = "a" + Math.round(Math.random() * 10000))
+		(nr = Math.round(Math.random()) + 1)
+		&& (rn = "a" + Math.round(Math.random() * 10000))
 		&& (promettre[rn] = true)
 		&& new Promise(function(resolve) {
 			setTimeout(function() {
@@ -13,7 +13,8 @@ function promettre (ran) {
 				resolve(rn);
 			}, 1000);
 		})
-		.then(promettre)
+		[nr == 1 ? "catch" : "then"]
+		(nr == 1 ? function(ran){ delete promettre[ran]; return ran; } : promettre)
 		:
 		console.log("then 0", ran)
 		&& (Math.round(Math.random()) == 0) ?
@@ -45,3 +46,27 @@ new Promise(function (resolve) { resolve(); })
 new Promise(function (resolve) { resolve(); })
 .then(function () { x == 1 && console.log("then 3")})
 .then(function () { console.log("fin 3"); });
+
+
+
+/* function promettre (ran) {
+	var rn;
+	return ! promettre[ran] ?
+		(rn = "a" + Math.round(Math.random() * 10000))
+		&& (promettre[rn] = true)
+		&& new Promise(function(resolve) {
+			setTimeout(function() {
+				console.log("résolution 0", rn);
+				resolve(rn);
+			}, 1000);
+		})
+		.then(promettre)
+		:
+		console.log("then 0", ran)
+		&& (Math.round(Math.random()) == 0) ?
+			promettre(ran)
+			:
+			delete promettre[ran]
+			&& ran;
+}
+*/
