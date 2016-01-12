@@ -1,4 +1,4 @@
-//duree minimale d'une promesse, Interfacteur
+//durée minimale d'une promesse, Interfacteur
 
 
 

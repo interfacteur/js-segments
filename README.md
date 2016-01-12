@@ -2,7 +2,7 @@ JavaScript, segments de code
 
 
 * promises-et-jquery.js : promesses encapsulant jQuery, ou le contraire
-* promises-duree-minimale.js : duree minimale d'une promesse
+* promises-duree-minimale.js : durée minimale d'une promesse
 * regex.js : expressions régulières utiles
 * regex1311.js : expressions régulières anciennement utiles
 * son-routine.js : jouer des sons en mode play vs stop selon l'API HTML5
