@@ -3,6 +3,7 @@ JavaScript, divers
 * msie-cc.js : commentaires conditionnels en-deça de MSIE 11
 * msie.classique.html : limiter les capacités de MSIE à v. 9 sur un développement classique
 * operateurs-memo.js : aide-mémoire sur les opérateurs logiques, arithmétiques etc.
+* promises-delai.js : introduire un délai dans le chaînage de promesses ?
 * promises-then-conditionnel.js : possibilités pour rendre conditionnelle la méthode .then()
 * snippet.client.add.jquery.js : snippet client d'ajout de jQuery à une page en consultation
 * var-etats.html : variables et déclaration, affectation, exécution
