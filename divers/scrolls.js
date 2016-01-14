@@ -43,23 +43,23 @@ b.scrollTop = y; ? */
 
 
 //avec jQuery
-var \$w = \$(window),
-    \$h = \$("html"),
-    \$b = \$("body");
+var $w = $(window),
+    $h = $("html"),
+    $b = $("body");
 
 //obtenir la mesure du scroll
-var scrollActif = \$w.scrollTop();
+var scrollActif = $w.scrollTop();
 
 //detecter le scroll
-\$w.on({
+$w.on({
     scroll: faire,
     resize: function(){
-        \$w.trigger("scroll");
+        $w.trigger("scroll");
 }   });
 
 //scroller
-var scrollant = \$b.prop("scrollTop") ? \$b : \$h.prop("scrollTop") ? \$h : \$h.add(\$b);
-scrollant.animate({ scrollTop : n },delai * \$w.scrollTop() / \$w.innerHeight(),"swing",callback);
+var scrollant = $b.prop("scrollTop") ? $b : $h.prop("scrollTop") ? $h : $h.add($b);
+scrollant.animate({ scrollTop : n },delai * $w.scrollTop() / $w.innerHeight(),"swing",callback);
 
 
 
@@ -67,7 +67,7 @@ scrollant.animate({ scrollTop : n },delai * \$w.scrollTop() / \$w.innerHeight(),
 
 
 //projet C mixte : ??
-\$(document).scrollTop() > document.documentElement.scrollTop ? \$(document).scrollTop() : document.documentElement.scrollTop
+$(document).scrollTop() > document.documentElement.scrollTop ? $(document).scrollTop() : document.documentElement.scrollTop
 
 
 
