@@ -1,4 +1,4 @@
-//études pour rendre conditionnelle la méthode .then()
+//études de structures conditionnelles avec la méthode .then()
 
 
 function promettre (id) {
