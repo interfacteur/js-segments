@@ -42,7 +42,9 @@ div a	{
 </div>
 <p>Les instructions par récursivité ne sont plus des promesses de base dans ce développement,<br>
 mais sont toujours dans le cadre d'une promesse globale.</p>
-<pre></pre>
+<p><code>Données initiales : datas.proxy = [[3, []], [4, [2]], [8, [4]], [6, [2, 3]], [2, []]]</code></p>
+<pre>Données traitées
+et inscrites dans datas.net : </pre>
 <script src="-media/jquery-2.1.1.min.js"></script>
 <script src="-media/modernizr-custom.js"></script>
 <script>
@@ -54,7 +56,7 @@ mais sont toujours dans le cadre d'une promesse globale.</p>
 
 	var datas = {
 			brut: [[2, []], [3, []], [4, [2]], [6, [2, 3]], [8, [4]]],
-			proxy: [[3, []], [4, [2]], [8, [2]], [6, [2, 3]], [2, []]], //sort(function () { return Math.random() - .5; })
+			proxy: [[3, []], [4, [2]], [8, [4]], [6, [2, 3]], [2, []]], //sort(function () { return Math.random() - .5; })
 			net: {
 				2: false,
 				3: false,
@@ -84,7 +86,9 @@ mais sont toujours dans le cadre d'une promesse globale.</p>
 				}
 			}
 			if (condition == true) {
-				datas.net[value] = factors;
+				datas.net[value] = [];
+				for (var i in factors)
+					datas.net[value].push(factors[i], datas.net[factors[i]]);
 				datas.purge.push(ind);
 			}
 		},
