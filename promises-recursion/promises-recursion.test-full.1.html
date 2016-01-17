@@ -140,8 +140,9 @@
 		$("body").addClass("settled");
 		$pre.append(new Date() - debut + " millisecondes<br><br>");
 		$pre.append(iter + " itérations<br><br>");
-		$pre.append("Test avec o.datas._VI : " + o.datas._VI + "<br><br>Données finales en vrac : ");
-		$pre.append(JSON.stringify(o.datas) + "<br><br>Données finales par entrée :</br>");
+		$pre.append("Test avec o.datas._VI : " + o.datas._VI + "<br><br>");
+		$pre.append('<a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-full.1.html#L53">Données initiales &lt;&gt;</a><br><br>');
+		$pre.append("Données finales :</br>");
 		$pre.append(Object.keys(o.datas).reduce(function (codeAccu, code) {
 			return codeAccu += code + " : " + o.datas[code] + "<br>";
 		}, ""));

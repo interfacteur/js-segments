@@ -54,13 +54,13 @@
 			calculs: {
 //generation 1
 				_A: function () {
-					return "=> A";
+					return "(=> A)";
 				},
 				_B: function () {
-					return "=> B";
+					return "(=> B)";
 				},
 				_C: function () {
-					return "=> C";
+					return "(=> C)";
 				},
 //generaton 2
 				_un: function () {
@@ -143,8 +143,9 @@
 		$("body").addClass("settled");
 		$pre.append(new Date() - debut + " millisecondes<br><br>");
 		$pre.append(iter + " itérations<br><br>");
-		$pre.append("Test avec o.datas._VI : " + o.datas._VI + "<br><br>Données finales en vrac : ");
-		$pre.append(JSON.stringify(o.datas) + "<br><br>Données finales à la ligne :</br>");
+		$pre.append("Test avec o.datas._VI : " + o.datas._VI + "<br><br>");
+		$pre.append('<a href="https://github.com/interfacteur/js-segments/blob/master/promises-recursion/promises-recursion.test-easy.1.html#L54">Données initiales &lt;&gt;</a><br><br>');
+		$pre.append("Données finales :</br>");
 		$pre.append(Object.keys(o.datas).reverse().reduce(function (codeAccu, code) {
 			return codeAccu += code + " : " + o.datas[code] + "<br>";
 		}, ""));

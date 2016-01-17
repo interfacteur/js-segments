@@ -11,6 +11,18 @@ p,
 pre	{
 	padding: .5em 1em;
 }
+body > div	{
+	font-size: .85em;
+	padding: .8em 2em;
+}
+div > div {
+	float: right;
+	width: 50%;
+}
+div a,
+pre a	{
+	color: #000;
+}
 p	{
 	font-size: .9em;
 	line-height: 1.4;
