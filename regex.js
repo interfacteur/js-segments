@@ -14,7 +14,8 @@
 /* QUESTION :
 	comment exprimer "tout caractère différent de la capture" ?
 	en js pas comme (?!\\1) qui est une lookahead - mais pas en Java ? cf. :
-	http://stackoverflow.com/questions/9718393/regex-backreferencing-a-character-that-was-not-matched-in-a-character-set*/
+	http://stackoverflow.com/questions/9718393/regex-backreferencing-a-character-that-was-not-matched-in-a-character-set
+*/
 
 
 //les parenthèses : dans (a(b) prend (b) ; dans (a\(b) prend tout
