@@ -2,7 +2,36 @@
 //https://regex101.com/
 
 
-/* 151213 */
+/* 151213, 160118 */
+
+
+
+
+//les guillemets
+/"(?:[^" ]|\\")*[^\\ ]"|'(?:[^' ]|\\')*[^\\ ]'/g
+//cf. https://regex101.com/r/gI8pE2/5
+	//testé sur "qsfkl'qlfdkj\"lk" 'qlsfkj\'lqfkjd' "qlsfmjk" 'qlfdkjd' 'qlsfdjk" "lsdlqkfj' "qsf"
+/* QUESTION :
+	comment exprimer "tout caractère différent de la capture" ? */
+
+
+//les parenthèses : dans (a(b) prend (b) ; dans (a\(b) prend tout
+/\(([^(]|\\\()+?\)|\{([^{]|\\\{)+?\}/g
+//cf. https://regex101.com/r/dR3sM1/1
+	//càd test sur (sqlfdkjsq)lqsfkjsdq(lsqfkjds) lqsfkj{lqsfj}qsfsq(qfsdjk}lqskfj)lskqfj)qlsf(lqsfj{slqfj)lkqsjf}lkj {qlsfkj)lsqkfj(sqlfj)lqsjf}qsflsjf(sqlfj{lqsfkj}qlsfkj)lqskfj{lsqfj{qlskdfj}lqsfkjd}lqfkj
+
+//les parenthèses : dans (a(b) prend (a(b)
+/\(.+?\)|\{.+?\}/g
+//cf. https://regex101.com/r/iU3hA7/1
+	//sur même chaîne
+
+
+
+
+//la "gourmandise" et la réticence :
+/.+(?=X)/.exec("abcXdefX")[0] == "abcXdef"
+/.+?(?=X)/.exec("abcXdefX")[0] == "abc"
+
 
 
 
@@ -25,12 +54,9 @@
 //http://www.ex-parrot.com/pdw/Mail-RFC822-Address.html
 
 
-//à éviter : http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
+//à éviter : solution de http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
 
 
-//la "gourmandise" et la réticence :
-/.+(?=X)/.exec("abcXdefX")[0] == "abcXdef"
-/.+?(?=X)/.exec("abcXdefX")[0] == "abc"
 
 
 //correspondance vs capture, et référence à un nième groupe via \n
