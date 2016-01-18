@@ -12,7 +12,9 @@
 //cf. https://regex101.com/r/gI8pE2/5
 	//testé sur "qsfkl'qlfdkj\"lk" 'qlsfkj\'lqfkjd' "qlsfmjk" 'qlfdkjd' 'qlsfdjk" "lsdlqkfj' "qsf"
 /* QUESTION :
-	comment exprimer "tout caractère différent de la capture" ? */
+	comment exprimer "tout caractère différent de la capture" ?
+	en js pas comme (?!\\1) qui est une lookahead - mais pas en Java ? cf. :
+	http://stackoverflow.com/questions/9718393/regex-backreferencing-a-character-that-was-not-matched-in-a-character-set*/
 
 
 //les parenthèses : dans (a(b) prend (b) ; dans (a\(b) prend tout
