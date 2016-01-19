@@ -12,8 +12,8 @@ var cleanJSON = function (str) {
 var clearJS = function (str) {
 	return str.replace(/\/\/.*/g, "") //commentaires sur une ligne
 		.replace(/\/\*([^\*]|\*(?!\/))*\*\//g, "") //commentaires sur plusieurs lignes
-		.replace(/[\t]/g, " "); //tabulations par un espacement
+		.replace(/[\t]/g, " ") //tabulations par un espacement
 		.replace(/^\s*/, "") //espacements initiaux
-		.replace(/\s\s/g, "\s") //espacements doubles
+		.replace(/\s\s/g, "\s"); //espacements doubles
 }
 
