@@ -6,6 +6,7 @@ var cleanJSON = function (str) {
 		.replace(/\s\s/g, "\s") //espacements doubles
 		.replace(/[\n\r\u2028\u2029\t]/g, ""); //retours à la ligne et charriot, tabulations
 }
+	/* usage initial : https://github.com/interfacteur/divers/blob/master/proxies-apis/interfaces-tests/cross-avec-jquery.xdomainrequest.html */
 
 //Éclaircir le contenu d'un fichier .js
 var clearJS = function (str) {
