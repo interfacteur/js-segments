@@ -1,6 +1,4 @@
 //https://regex101.com
-//https://regex101.com/
-
 
 /* 151213, 160118 */
 
