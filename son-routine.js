@@ -13,12 +13,19 @@ mise en œuvre sur http://www.langhade.net/ludwik/jeux/
 
 
 var globMeth = {
-	doNothing: function () { }
-};
+	doNothing: function () { },
+	re: {
+		iaye: /(iphone|ipod|ipad)/
+}	};
+
 
 
 // $(function () {
 	// "use strict";
+
+
+	globMeth.iaye = navigator.userAgent.toLowerCase().match(globMeth.re.iaye); //http://www.sitepoint.com/jquery-detect-mobile-devices-iphone-ipod-ipad/
+
 
 //Fonction constructeur pour jouer les sons en mode play vs stop ----------------------------------------------------------------------------
 	globMeth.Sound = function () {
