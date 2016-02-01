@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Alternative aux promesses</title>
+</head>
+
+<body>
+<pre>A TESTER</pre>
+<script src="-media/jquery-2.1.1.min.js"></script>
+<script id="plug">
+"use strict";
+(	typeof Promise === "undefined"
+	||
+	Promise.toString().indexOf("[native code]") === -1
+)
+&& $("<script>", { "src" : "-media/es6-promise.min.js" }).insertAfter($("#plug"));
+</script>
+</body>
+</html>
