@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Expressions régulières : caractères dans le désordre \ Canopée ~ outils / Equatorium</title>
+
+<meta name="author" content="Gaëtan Langhade, interfacteur">
+<style>
+body	{
+	font: 67.5% monospace;
+	min-width: 1180px;
+}
+ol,
+ul,
+p	{
+	float: left;
+	font-size: 1.5em;
+}
+ul + ol	{
+	float: right;
+}
+ul,
+ul li	{
+	margin-left: 0;
+	padding-left: 2px;
+}
+span span,
+ul + ol,
+ul + ol input	{
+	color: #009;
+}
+ol:first-of-type,
+ol:first-of-type input,
+span	{
+	color: #090;
+}
+input	{
+	border: 1px solid #000;
+	font: inherit;
+	width: 100px;
+}
+li	{
+	height: 16px;
+	padding: 4px 0;
+}
+ul li	{
+	line-height: 1.5;
+	list-style: none;
+}
+code	{
+	font-style: italic;
+}
+li code	{
+	font-size: .7em;
+}
+textarea	{
+	background: #444;
+	clear: both;
+	color: yellow;
+	display: block;
+	font-family: monospace;
+	font-size: 1.4em;
+	line-height: 2;
+	margin-top: 24px;
+	width: 100%;
+}
+textarea ~ p	{
+	margin: 12px 7%;
+	text-align: center;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /* all IE 10 ? */
+	textarea	{
+		min-height: 350px;
+	}
+}  
+</style>
+<!--[if IE]>
+<style>
+textarea	{
+	min-height: 350px;
+}
+</style>
+<![endif]-->
+</head>
+
+<body>
+<h1>Expressions régulières&nbsp;: identifier une chaîne sans l'ordre d'apparition des caractères	</h1>
+<p>Colonne de gauche&nbsp;- en vert&nbsp;: dix chaînes de dix caractères au hasard.<br>
+Colonne de droite&nbsp;- en bleu&nbsp;: depuis la colonne de gauche, chaque chaîne est triée par ordre alphabétique et l'ensemble est "rebattu".<br>
+Au milieu et en-dessous&nbsp;: expressions régulières "préparées" par la colonne de droite, 'matchant' une chaîne de la colonne de gauche, et permettant ainsi de rétablir l'équivalence entre les chaînes des colonnes.</p>
+<ol>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ol>
+<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<ol>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ol>
+<textarea id="formules" rows="11"></textarea>
+<p>Problématique illustrée&nbsp;: l'opérateur logique "ET" n'existe pas dans la syntaxes des expressions régulières.<br>
+Il reste possible de relier logiquement plusieurs appels d'une même méthode.<br>
+Exemple en JavaScript&nbsp;: <code>chaine.match(/a/) && chaine.match(/b/)</code>.<br>
+Cela permet de savoir si "chaine" contient à la fois les lettres "a" et "b" sans tenir compte de leur ordre d'apparition.<br>
+Mais cela peut vite s'avérer lourd à coder.</p>
+<p>Autre solution pour "a" et "b" dans le désordre&nbsp;: chercher une chaine dont le début "^" soit suivi "(?=)" de caractères divers optionnels ".*" composés au minimum d'une fois "{1}" la lettre "a", et soit aussi suivi de caractères divers dont un "b".<br>
+Soit&nbsp;: <code>/^(?=(.*a){1})(?=(.*b){1}).{3}$/</code><br>
+Cet exemple se finit par un filtre terminal ".{3}$"&nbsp;: la chaine à identifier ne doit être composée que de trois caractères.<br>
+Lecture du principe sur <a href="http://stackoverflow.com/a/470602" lang="en" hreflang="en">regex - Regular Expressions: Is there an AND operator? - Stack Overflow</a>.</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+(function($){
+	$(document).ready(function(){
+		var longueur = 10;
+		var lettrer = function(){
+			return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+		}
+		var $li1 = $("ol:eq(0) li");
+		var $li2 = $("ol:eq(1) li");
+		$li1.each(function(){
+			var lettres = "";
+			for (var i = 0;i<longueur;i++) lettres += lettrer();
+			$(this).html('<input type="text" value="' + lettres + '">');
+		});
+		var lettreExpress = [];
+		var melange = [];
+		for (var i = 0;i<$li1.length;i++) melange[i] = i;
+		$li2.each(function(zi){
+			var quel = Math.floor(Math.random() * melange.length);
+			$(this).html('<input type="text" value="' + $li1.eq(melange[quel]).find("input").val().split("").sort().join("") + '">');
+			melange0 = melange.slice(0,quel).concat(melange.slice(quel + 1));
+			melange = melange0;
+			var lettre = $(this).find("input").val();
+			var lettres = lettre.split("");
+			var lettreExp = "^";
+			for (var i = 0;i<longueur;i++){
+				var l = new RegExp(lettres[i],"g");
+				var combien = lettre.match(l).length;
+				lettreExp += "(?=(.*" + lettres[i] + "){" + combien + "})";
+				i += combien - 1;
+			}
+			lettreExpress[zi] = new RegExp(lettreExp + ".{" + longueur + "}$");
+		});
+		var formules = "";
+		$("ul li").each(function(zi){
+			for (var i = 0;i<lettreExpress.length;i++){
+				if ($li1.eq(zi).find("input").val().match(lettreExpress[i])){
+					formules += (zi < 9 ? " " : "") + eval(zi + 1) + '. "' + $li1.eq(zi).find("input").val() + '".match('
+					formules += lettreExpress[i].toString() + ");\n";
+					var gauche = eval(zi + 1) < 10 ? "0" + eval(zi + 1) : eval(zi + 1);
+					var droite = eval(i + 1) < 10 ? "0" + eval(i + 1) : eval(i + 1);
+					$(this).html("<span>" + gauche +  " =</span><span><span>= " + droite + " " + $li2.eq(i).find("input").val() + "</span></span> " + "<code>" + lettreExpress[i] + "</code>");
+		}	}	});
+		$("#formules").val(formules);
+});	})(jQuery);
+</script>
+</body>
+</html>
