@@ -134,7 +134,7 @@ Mais cela peut vite s'avérer lourd à coder.</p>
 <p>Autre solution pour "a" et "b" dans le désordre&nbsp;: chercher une chaine dont le début "^" soit suivi "(?=)" de caractères divers optionnels ".*" composés au minimum d'une fois "{1}" la lettre "a", et soit aussi suivi de caractères divers dont un "b".<br>
 Soit&nbsp;: <code>/^(?=(.*a){1})(?=(.*b){1}).{3}$/</code><br>
 Cet exemple se finit par un filtre terminal ".{3}$"&nbsp;: la chaine à identifier ne doit être composée que de trois caractères.<br>
-Lecture du principe sur <a href="http://stackoverflow.com/a/470602" lang="en" hreflang="en">regex - Regular Expressions: Is there an AND operator? - Stack Overflow</a>.</p>
+Lecture du principe sur <a href="http://stackoverflow.com/a/470602" lang="en" hreflang="en">regex - Regular Expressions: Is there an AND operator? - Stack Overflow</a> ; <a href="https://github.com/interfacteur/js-segments/blob/master/regex-chaine-desordre.html">Github</a>.</p>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 (function($){
