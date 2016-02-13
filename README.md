@@ -1,11 +1,12 @@
 JavaScript, segments de code
 
 
-* promises-et-jquery.js : promesses encapsulant jQuery, ou le contraire
 * promises-duree-minimale.js : durée minimale d'une promesse
+* promises-et-jquery.js : promesses encapsulant jQuery, ou le contraire
+* regex-chaine-desordre.html : expression régulière pour identifier une chaîne dans le désordre cf. http://www.equatorium.net/e1/ou-regexp-desordre.html [ARCHIVE]
+* regex.fonctions.js : fonctions utiles
 * regex.js : expressions régulières utiles
 * regex1311.js : expressions régulières anciennement utiles
-* regex-chaine-desordre.html : expression régulière pour identifier une chaîne dans le désordre cf. http://www.equatorium.net/e1/ou-regexp-desordre.html [ARCHIVE]
 * son-routine.js : jouer des sons en mode play vs stop selon l'API HTML5
 
 
