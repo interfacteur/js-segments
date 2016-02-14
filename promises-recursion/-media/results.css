@@ -24,6 +24,8 @@ pre a	{
 	color: #000;
 }
 p	{
+	background: grey;
+	color: white;
 	font-size: .9em;
 	line-height: 1.4;
 	margin: auto;
