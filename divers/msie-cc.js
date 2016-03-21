@@ -1,18 +1,23 @@
 /* NE FONCTIONNE PLUS AVEC MSIE 11
- 
+
 	sauf avec <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
 	tout en veillant en ce cas très attentivement à tous les impacts possibles
 	dont le fait de ne pas rétrograder MSIE 10
-	
+
 	nota bene : une valeur plus classique de cette meta
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
 	permet d'ajuster la version déclarée de MSIE à sa version véritable, et d'être "frame" pour GC
-	
+
 	Les commentaires conditionnels <!--[if IE ]><![endif]--> ne sont plus reconnus à partir de MSIE 10
 	et resent donc inutiles si l'on avait pensé ajuster ainsi la meta
-	
+
 	Il reste possible d'établir un moyen terme dans ces décalages :
 	https://github.com/interfacteur/utiles/blob/master/msie.classique.html */
+
+
+
+//cf. aussi DOCUcommentaires.sublime-snippet
+
 
 
 //Pour toutes les versions de MSIE inférieures à 11 :

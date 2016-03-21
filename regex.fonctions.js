@@ -32,3 +32,14 @@ var uniLine = function (str) {
 	return str.replace(/[\f\n\r\u2028\u2029]/g, ""); //sans les retours à la page, à la ligne et charriot
 }
 
+
+
+
+
+
+//ancien :
+//http://blog.pascal-martin.fr/post/JSON-format-donnees-retour-requete-Ajax
+//Pour vous assurer de la validité d'une chaîne JSON avant de l'évaluer, vous pouvez utiliser le code suivant :
+var monObjet = ! (/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/|>.test(text.replace(/"(\\.|[^"\\])*"/g, '')))
+	&& eval('(' + text + ')');
+//et http://jsonlint.com/
