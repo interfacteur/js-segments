@@ -1,6 +1,9 @@
 // SCROLL A TESTER
 
 
+//cf. aussi DOCUscroll.sublime-snippet
+
+
 //sans jQuery
 var w = window,
     h = document.getElementsByTagName("html")[0], //document.querySelector("html")
