@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Formulaires</title>
+<link rel="stylesheet" href="ressources/regularize.css">
+<link rel="stylesheet" href="ressources/formulaires.css">
+</head>
+
+<body>
+<section>
+	<header>
+		<h1>Validation de formulaires proches de HTML 4 (novalidate) / <a href="formulaires.html">HTML5</a></h1>
+		<button id="b1">+</button>
+		<button id="b2">-</button>
+	</header>
+	<p id="validation">&nbsp;</p>
+	<form action="#" method="get" novalidate data-action="toSend">
+		<p>
+			<label for="nom">Nom&nbsp;:</label>
+			<input type="text" id="nom" value="">
+		</p>
+		<p>
+			<label for="mois">Mois&nbsp;:
+				<span><small><abbr title="Respecter le format">◌</abbr></small> au format 'n' ou '0n' ou '1n'</span>
+			</label>
+			<input type="text" pattern="^((1[012])|(0?[1-9]))$" placeholder="nn" id="mois" value="">
+			<small><abbr title="Respecter le format">◌</abbr></small>
+		</p>
+		<p>
+			<label for="cara">Un ou des signes&nbsp;:
+				<span><small><abbr title="Champ obligatoire">•</abbr></small> obligatoire</span>
+			</label>
+			<input type="text" required id="cara" value="">
+			<small><abbr title="Champ obligatoire">•</abbr></small>
+		</p>
+		<p>
+			<label for="annee">Année concernée&nbsp;:
+				<span><small><abbr title="Champ obligatoire, respecter le format">●</abbr></small> entre 1 et 4 chiffres, obligatoire</span>
+			</label>
+			<input type="text" required pattern="^\d{1,4}$" placeholder="nnnn" id="annee" value="">
+			<small><abbr title="Champ obligatoire, respecter le format">●</abbr></small>
+		</p>
+		<p>
+			<label for="email">E-mail&nbsp;:
+				<span><small><abbr title="Champ obligatoire, respecter le format">●</abbr></small> 'adresse@domaine.tld', obligatoire</span>
+			</label>
+			<!-- normalement type="email"…
+				attribut pattern=".*" et présent avec data-control - cf. common.controls dans les js -->
+			<input type="text" required pattern=".*" placeholder="adresse@domaine.tld" id="email" value="" data-control="email">
+			<small><abbr title="Champ obligatoire, respecter le format">●</abbr></small>
+		</p>
+		<p><input type="submit" value="ok"></p>
+	</form>
+</section>
+
+<script src="ressources/jquery-1.12.3.min.js"></script>
+<script src="ressources/interface.js"></script>
+<script src="formulaires.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+body	{
+	background-color: rgba(0, 0, 0, .1);
+	padding: .66em;
+}
+header	{
+	background-color: grey;
+	text-align: center;
+}
+h1	{
+	color: white;
+	font-size: 1.25em;
+	font-style: italic;
+	font-weight: normal;
+	margin: 0;
+	padding: .5em;
+}
+h1 a	{
+	color: white;
+}
+button	{
+	background-color: black;
+	color: yellow;
+	font-size: 2em;
+	width: 1em;
+}
+button,
+[type="submit"]	{
+	cursor: pointer;
+}
+[type="submit"]	{
+	cursor: pointer;
+	width: 100%;
+}
+p	{
+	margin: 0;
+}
+#validation	{
+	font-weight: bold;
+	padding: .5em;
+}
+p + p	{
+	padding-top: 1.25em;
+}
+section > p	{
+	border: 1px solid grey;
+	border-width: 0 44px 6px 44px;
+	font-size: .9em;
+	text-align: center;
+}
+form	{
+	background: white;
+	border-radius: 1em;
+	float: left;
+	margin: 1em;
+	padding: 1em;
+}
+label	{
+	display: block;
+	font-size: .9em;
+}
+label span	{
+	display: block;
+	font-size: .9em;
+	font-style: italic;
+	line-height: 1.35;
+}
+input	{
+	margin-top: .33em;
+	width: 14em;
+}
+small	{
+	display: inline-block;
+	font-size: 1.25em;
+	vertical-align: middle;
+}
+p > small	{
+	height: 1em;
+	text-align: center;
+	padding: .2em 0 0 .5em;
+	width: 1em;
+}
+small abbr[title]	{
+	border: 0;
+	outline: 0;
+}
+.error input	{
+	outline: 2px solid red;
+}
+.error span	{
+	color: red;
+}
+.valid input	{
+	outline: 2px solid green;
+}
