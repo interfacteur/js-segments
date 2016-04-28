@@ -13,6 +13,7 @@ JavaScript, segments de code
 Dossiers
 
 * divers : astuces, aides-mémoire, tests, snippets
+* formulaires-validation : base pour une validation accessible de formulaires dynamiques, à enrichir avec l'API de contraintes de validation
 * promises-map-reduce : map().reduce() pour restituer l'ordre d'instanciation
 * promises-recursion : ordonnancer des promesses simultanées
 * promises-support-alt : support alternatif des promesses
