@@ -1,4 +1,10 @@
-/* Gaëtan Langhade, Interfacteur, mars-avril 2015
+/*
+
+160514 : voir https://alemangui.github.io/pizzicato/
+
+
+
+Gaëtan Langhade, Interfacteur, mars-avril 2015
 
 au 30 avril 2015, test sur http://www.equatorium.net/e1/+tests/touchable-son.html
 
