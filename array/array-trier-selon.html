@@ -9,12 +9,13 @@
 
 <body>
 <script>
+"use strict";
 function trierSelon (tabl1, tabl2, refer) {
 	for (var index = 0, limite = tabl1.length < tabl2.length ? tabl1.length : tabl2.length; index < limite; ++index)
 		tabl1[index] = [tabl2[index], tabl1[index]];
 	tabl1.sort(function(a, b) { return a[0] - b[0]; });
-	if (refer == true)
-		tabl2.sort(function(a, b) { return a - b; });
+	refer == true
+	&& tabl2.sort(function(a, b) { return a - b; });
 	for (var index = 0; index < limite; ++index)
 		tabl1[index] = tabl1[index][1];
 }
