@@ -1,6 +1,5 @@
 JavaScript, divers
 
-* array-doublons.js : enlever les doublons d'un tableau
 * msie-cc.js : commentaires conditionnels en-deça de MSIE 11
 * msie.classique.html : limiter les capacités de MSIE à v. 9 sur un développement classique
 * operateurs-memo.js : aide-mémoire sur les opérateurs logiques, arithmétiques etc.
