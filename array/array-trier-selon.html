@@ -16,7 +16,7 @@ function trierSelon (tabl1, tabl2, refer) {
 	tabl1.sort(function(a, b) { return a[0] - b[0]; });
 	refer == true
 	&& tabl2.sort(function(a, b) { return a - b; });
-	for (var index = 0; index < limite; ++index)
+	for (index = 0; index < limite; ++index)
 		tabl1[index] = tabl1[index][1];
 }
 
