@@ -1,8 +1,6 @@
 JavaScript, segments de code
 
 
-* promises-duree-minimale.js : durée minimale d'une promesse
-* promises-et-jquery.js : promesses encapsulant jQuery, ou le contraire
 * regex-chaine-desordre.html : expression régulière pour identifier une chaîne dans le désordre cf. http://www.equatorium.net/e1/ou-regexp-desordre.html [ARCHIVE]
 * regex.fonctions.js : fonctions utiles
 * regex.js : expressions régulières utiles
