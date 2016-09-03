@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Trier un tableau selon un autre</title>
+<meta name="author" content="Gaëtan Langhade">
+</head>
+
+<body>
+<script>
+function trierSelon (tabl1, tabl2, refer) {
+	for (var index = 0, limite = tabl1.length < tabl2.length ? tabl1.length : tabl2.length; index < limite; ++index)
+		tabl1[index] = [tabl2[index], tabl1[index]];
+	tabl1.sort(function(a, b) { return a[0] - b[0]; });
+	if (refer == true)
+		tabl2.sort(function(a, b) { return a - b; });
+	for (var index = 0; index < limite; ++index)
+		tabl1[index] = tabl1[index][1];
+}
+
+
+var tableauReference = [
+		20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13
+	],
+	nimportequeltableau = new Array(Math.round(Math.random() * 50 + 10));
+for (var i = 0, ln = nimportequeltableau.length; i < ln; ++i)
+	nimportequeltableau[i] = i;
+
+trierSelon(nimportequeltableau, tableauReference, false);
+</script>
+</body>
+</html>
