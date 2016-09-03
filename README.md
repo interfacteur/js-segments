@@ -12,6 +12,7 @@ JavaScript, segments de code
 
 Dossiers
 
+* array : utile pour la manipulation des tableaux
 * divers : astuces, aides-mémoire, tests, snippets
 * formulaires-validation : base pour une validation accessible de formulaires dynamiques, à enrichir avec l'API de contraintes de validation
 * promises-divers : divers sur les promesses
