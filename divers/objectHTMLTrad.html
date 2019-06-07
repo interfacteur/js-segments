@@ -85,14 +85,13 @@ dd:last-child > span {
 	<h2>Côté JavaScript</h2>
 	<pre>
 	function objectToDl(o) {
+		let objectKeys = Object.keys(o);
 		return '&lt;dl&gt;'
-			+ Object.keys(o).map(key =>
-				`&lt;dt&gt;${key}&lt;/dt&gt;
-				&lt;dd&gt;${typeof o[key] === 'object' ?
-					objectToDl(o[key]) :
-					"'" + o[key] + "'&lt;span&gt;,&lt;/span&gt;"
-				}&lt;/dd&gt;`
-			)
+			+ objectKeys.map(key =&gt; {
+				let value = typeof o[key] === 'object' ?
+					objectToDl(o[key]) : `'${o[key]}'&lt;span&gt;,&lt;/span&gt;`;
+				return `&lt;dt&gt;${key}&lt;/dt&gt;&lt;dd&gt;${value}&lt;/dd&gt;`;
+			})
 			.join('')
 			+ '&lt;/dl&gt;';
 	}</pre>
@@ -139,44 +138,44 @@ dd:last-child > span {
 }
 </pre>
 </section>
+
 <script>
-(function()
+"use strict";
+let obj = {
+	name: 'app',
+	obj: {
+		super: {
+			prop: {
+				nested: 'reall',
+				reall: 'nested'
+			},
+			other: 'hey',
+			same: 'hey'
+		},
+		stuff: 'yeah',
+		resuper: {
+			other: 'hey',
+			same: 'hey'
+		},
+	},
+	rename: 'c'
+};
+
+
+function objectToDl(o)
 {
-	"use strict";
-	let obj = {
-	  name: 'app',
-      obj: {
-        super: {
-          prop: {
-            nested: 'reall',
-            reall: 'nested'
-          },
-          other: 'hey',
-          same: 'hey'
-        },
-        stuff: 'yeah',
-        resuper: {
-          other: 'hey',
-          same: 'hey'
-        },
-      },
-      rename: 'c'
-    }
+    let objectKeys = Object.keys(o);
+    return '<dl>'
+        + objectKeys.map(key => {
+            let value = typeof o[key] === 'object' ?
+                objectToDl(o[key]) : `'${o[key]}'<span>,</span>`;
+            return `<dt>${key}</dt><dd>${value}</dd>`;
+        })
+            .join('')
+        + '</dl>';
+}
 
-
-	function objectToDl(o)
-	{
-		return '<dl>' +
-			Object.keys(o).map(key =>
-				`<dt>${key}</dt>
-				<dd>${typeof o[key] === 'object' ? objectToDl(o[key]) : "'" + o[key] + "'<span>,</span>"}</dd>`
-			)
-			.join('')
-			+ '</dl>';
-	}
-
-	document.querySelector('div').innerHTML = objectToDl(obj);
-})();
+document.querySelector('div').innerHTML = objectToDl(obj);
 </script>
 </body>
 
