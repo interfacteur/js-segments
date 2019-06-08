@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<!-- cf. https://equatorium.net/ex--exemples/objectToHTMLdlGenerator.html -->
+
+<head>
+<meta charset="UTF-8">
+<title>Rendu HTML d'un objet littéral simple JavaScript via un générateur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+body {
+	background: #FFF;
+	color: #000;
+	font-family: sans-serif;
+	margin: 0;
+	min-height: 100vh;
+}
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+h1 {
+	font-size: 1.3rem;
+}
+h2 {
+	font-size: 1rem;
+}
+div > dl,
+pre {
+	font-family: monospace;
+}
+dl {
+	background: #80000022;
+	border: 1px dotted maroon;
+	display: inline-block;
+	font-size: 1.2rem;
+	margin-left: 1.2rem;
+	overflow: hidden;
+	padding-left: 2.4rem;
+}
+dl::before,
+dl::after {
+	content: '{';
+	float: left;
+	margin-left: -2rem;
+}
+dl::after {
+	clear: both;
+	content: '}';
+}
+dt,
+dd {
+	float: left;
+}
+dt {
+	clear: left;
+}
+dd {
+	margin-left: .4rem;
+	position: relative;
+}
+dd:not(:last-child) > dl::after {
+	content: '},';
+}
+dt::after {
+	content: ':';
+}
+dd:last-child > span {
+	display: none;
+}
+</style>
+</head>
+
+<body>
+<section>
+	<h1>Interprétation HTML d'un objet js littéral simple via un générateur</h1>
+	<a href="https://github.com/interfacteur/js-segments/blob/master/divers/objectToHTMLdlGenerator.html">sur Github</a><em>merci à William</em>
+	<div></div>
+	<h2>Côté JavaScript</h2>
+	<pre>
+	const objectToDl =
+	{
+		*[Symbol.iterator] (o)
+		{
+			yield '&lt;dl&gt;';
+			for (let val in o)
+			{
+				let dd = typeof o[val] === 'object' ?
+					Array.from(objectToDl[Symbol.iterator](o[val])).join('')
+					: `'${o[val]}'&lt;span&gt;,&lt;/span&gt;`;
+				yield  `&lt;dt&gt;${val}&lt;/dt&gt;&lt;dd&gt;${dd}&lt;/dd&gt;`;
+			}
+			yield '&lt;/dl&gt;';
+		}
+	}</pre>
+	<h2>Côté CSS</h2>
+	<pre>
+dl {
+	background: #80000022;
+	border: 1px dotted maroon;
+	display: inline-block;
+	font-size: 1.2rem;
+	margin-left: 1.2rem;
+	overflow: hidden;
+	padding-left: 2.4rem;
+}
+dl::before,
+dl::after {
+	content: '{';
+	float: left;
+	margin-left: -2rem;
+}
+dl::after {
+	clear: both;
+	content: '}';
+}
+dt,
+dd {
+	float: left;
+}
+dt {
+	clear: left;
+}
+dd {
+	margin-left: .4rem;
+	position: relative;
+}
+dd:not(:last-child) > dl::after {
+	content: '},';
+}
+dt::after {
+	content: ':';
+}
+dd:last-child > span {
+	display: none;
+}
+</pre>
+</section>
+
+<script>
+"use strict";
+const objectToDl =
+{
+	*[Symbol.iterator] (o)
+	{
+		yield '<dl>';
+		for (let val in o)
+		{
+			let dd = typeof o[val] === 'object' ?
+				Array.from(objectToDl[Symbol.iterator](o[val])).join('')
+				: `'${o[val]}'<span>,</span>`;
+			yield  `<dt>${val}</dt><dd>${dd}</dd>`;
+		}
+		yield '</dl>';
+	}
+}
+let obj = {
+	name: 'app',
+	obj: {
+		super: {
+			prop: {
+				nested: 'reall',
+				reall: 'nested'
+			},
+			other: 'hey',
+			same: 'hey'
+		},
+		stuff: 'yeah',
+		resuper: {
+			other: 'hey',
+			same: 'hey'
+		},
+	},
+	rename: 'c'
+};
+
+document.querySelector('div').innerHTML = Array.from(objectToDl[Symbol.iterator](obj)).join('');
+</script>
+</body>
+
+</html>
