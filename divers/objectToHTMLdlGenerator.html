@@ -83,20 +83,17 @@ dd:last-child > span {
 	<div></div>
 	<h2>Côté JavaScript</h2>
 	<pre>
-	const objectToDl =
+	function* objectToDl(o)
 	{
-		*[Symbol.iterator] (o)
+		yield '&lt;dl&gt;';
+		for (let [k, v] of Object.entries(o))
 		{
-			yield '&lt;dl&gt;';
-			for (let val in o)
-			{
-				let dd = typeof o[val] === 'object' ?
-					Array.from(objectToDl[Symbol.iterator](o[val])).join('')
-					: `'${o[val]}'&lt;span&gt;,&lt;/span&gt;`;
-				yield  `&lt;dt&gt;${val}&lt;/dt&gt;&lt;dd&gt;${dd}&lt;/dd&gt;`;
-			}
-			yield '&lt;/dl&gt;';
+			let dd = typeof v === 'object' ?
+				Array.from(objectToDl(v)).join('')
+				: `'${v}'&lt;span&gt;,&lt;/span&gt;`;
+			yield  `&lt;dt&gt;${k}&lt;/dt&gt;&lt;dd&gt;${dd}&lt;/dd&gt;`;
 		}
+		yield '&lt;/dl&gt;';
 	}</pre>
 	<h2>Côté CSS</h2>
 	<pre>
@@ -144,20 +141,17 @@ dd:last-child > span {
 
 <script>
 "use strict";
-const objectToDl =
+function* objectToDl(o)
 {
-	*[Symbol.iterator] (o)
+	yield '<dl>';
+	for (let [k, v] of Object.entries(o))
 	{
-		yield '<dl>';
-		for (let val in o)
-		{
-			let dd = typeof o[val] === 'object' ?
-				Array.from(objectToDl[Symbol.iterator](o[val])).join('')
-				: `'${o[val]}'<span>,</span>`;
-			yield  `<dt>${val}</dt><dd>${dd}</dd>`;
-		}
-		yield '</dl>';
+		let dd = typeof v === 'object' ?
+			Array.from(objectToDl(v)).join('')
+			: `'${v}'<span>,</span>`;
+		yield  `<dt>${k}</dt><dd>${dd}</dd>`;
 	}
+	yield '</dl>';
 }
 let obj = {
 	name: 'app',
@@ -179,7 +173,7 @@ let obj = {
 	rename: 'c'
 };
 
-document.querySelector('div').innerHTML = Array.from(objectToDl[Symbol.iterator](obj)).join('');
+document.querySelector('div').innerHTML = Array.from(objectToDl(obj)).join('');
 </script>
 </body>
 
