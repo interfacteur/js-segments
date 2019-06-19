@@ -1,6 +1,7 @@
 JavaScript, segments de code
 
 
+* async_recursive_IIFE.js : IIFE avec fonction async récursive pour calculer la hauteur d'un élément inséré dans le DOM
 * regex-chaine-desordre.html : expression régulière pour identifier une chaîne dans le désordre cf. http://www.equatorium.net/e1/ou-regexp-desordre.html [ARCHIVE]
 * regex.fonctions.js : fonctions utiles
 * regex.js : expressions régulières utiles
